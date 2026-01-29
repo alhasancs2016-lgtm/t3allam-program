@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Course by Mohamed Alhasan to learn HTML, CSS, and JavaScript for beginners.">
+
+<title>Course Mohamed Alhasan | Web Course</title>
+
+<!-- jsPDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+:root{
+  --main:#0b6cf5;
+  --bg:#f3f4f6;
+  --card:#fff;
+  --text:#000;
+}
+.dark{
+  --bg:#121212;
+  --card:#1f1f1f;
+  --text:#fff;
+}
+body{
+  margin:0;
+  font-family:Tahoma,Arial;
+  background:var(--bg);
+  color:var(--text);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Mohamed Alhasan</h1>
+<p>كورس HTML - CSS - JavaScript</p>
+</header>
+
+<nav>
+<a href="#html">HTML</a>
+<a href="#css">CSS</a>
+<a href="#js">JavaScript</a>
+<a href="#test">الاختبار</a>
+<button onclick="toggleDark()">🌙</button>
+</nav>
+
+<!-- HTML -->
+<div class="container" id="html">
+<h2>📘 HTML</h2>
+<code>
+&lt;h1&gt;عنوان&lt;/h1&gt;
+&lt;p&gt;فقرة&lt;/p&gt;
+&lt;a href="#"&gt;رابط&lt;/a&gt;
+&lt;img src="img.jpg"&gt;
+</code>
+</div>
+
+<!-- CSS -->
+<div class="container" id="css">
+<h2>🎨 CSS</h2>
+<code>
+body{
+  background:#eee;
+}
+.box{
+  padding:20px;
+  margin:10px;
+}
+</code>
+</div>
+
+<!-- JavaScript -->
+<div class="container" id="js">
+<h2>⚡ JavaScript Basics</h2>
+<code>
+let x = 5;
+let y = 10;
+alert(x + y);
+</code>
+
+<code>
+function sayHello(){
+  alert("Hello World");
+}
+</code>
+
+<button onclick="sayHello()">جرب JavaScript</button>
+</div>
+
+<!-- TEST -->
+<div class="container" id="test">
+<h2>📝 الاختبار النهائي</h2>
+
+<div class="question">
+<p>HTML اختصار لـ ؟</p>
+<input type="radio" name="q1" id="q1c"> Hyper Text Markup Language<br>
+<input type="radio" name="q1"> High Text Machine Language
+</div>
+
+<div class="question">
+<p>CSS تستخدم لـ ؟</p>
+<input type="radio" name="q2" id="q2c"> تنسيق الموقع<br>
+<input type="radio" name="q2"> برمجة السيرفر
+</div>
+
+<div class="question">
+<p>JavaScript تستخدم لـ ؟</p>
+<input type="radio" name="q3" id="q3c"> التفاعل<br>
+<input type="radio" name="q3"> التصميم
+</div>
+
+<button onclick="finishTest()">إنهاء الاختبار</button>
+<p class="result" id="result"></p>
+<button onclick="downloadPDF()">تحميل الشهادة PDF</button>
+</div>
+
+<footer>
+© 2026 Mohamed Alhasan
+</footer>
+
+<script>
+function toggleDark(){
+  document.body.classList.toggle("dark");
+}
+
+function sayHello(){
+  alert("JavaScript شغالة 🔥");
+}
+
+function finishTest(){
+  let score=0;
+  if(q1c.checked) score++;
+  if(q2c.checked) score++;
+  if(q3c.checked) score++;
+
+  localStorage.setItem("score",score);
+
+  result.innerHTML="درجتك: "+score+" / 3";
+}
+
+function downloadPDF(){
+  const { jsPDF } = window.jspdf;
+  let doc = new jsPDF();
+
+  let score = localStorage.getItem("score") || 0;
+
+  doc.setFontSize(20);
+  doc.text("Certificate of Completion",20,30);
+  doc.setFontSize(14);
+  doc.text("Name: Mohamed Alhasan",20,50);
+  doc.text("Score: "+score+" / 3",20,65);
+  doc.text("Web Development Course",20,80);
+
+  doc.save("certificate.pdf");
+}
+</script>
+
+</body>
+</html>
